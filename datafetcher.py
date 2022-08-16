@@ -16,7 +16,7 @@ def get_bbox_size_EBI(json_file):
 def get_diff_EBI(bbox_size):
     diff = []
     for i in range(len(bbox_size)-1):
-        diff.append(bbox_size[i+1] - bbox_size[i])
+        diff.append(abs(bbox_size[i+1] - bbox_size[i]))
     return diff
 
 def get_stats_EBI(diff):
@@ -38,13 +38,35 @@ def get_bbox_size_IBI(json_file):
 def get_diff_IBI(bbox_size):
     diff = []
     for i in range(len(bbox_size)-1):
-        diff.append(bbox_size[i+1] - bbox_size[i])
+        diff.append(abs(bbox_size[i+1] - bbox_size[i]))
     return diff
 
 def get_stats_IBI(diff):
     mean = np.mean(diff)
     std = np.std(diff)
     return mean, std
+
+def get_bbox_size_EBP(json_file):
+    with open(json_file) as f:
+        data = json.load(f)
+    bbox_size = []
+    for i in range(len(data)):
+        for j in range(len(data[i]['annotations'])):
+            if data[i]['annotations'][j]['label'] == 'EBP':
+                bbox_size.append(data[i]['annotations'][j]['coordinates']['width'] * data[i]['annotations'][j]['coordinates']['height'])
+                # print(bbox_size)
+    return bbox_size
+
+def get_diff_EBP(bbox_size):
+    diff = []
+    for i in range(len(bbox_size)-1):
+        diff.append(abs(bbox_size[i+1] - bbox_size[i]))
+    return diff
+
+def get_stats_EBP(diff):
+    mean = np.mean(diff)
+    std = np.std(diff)
+    return mean, std    
 
 def get_bbox_size_IBP(json_file):
     with open(json_file) as f:

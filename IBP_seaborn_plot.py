@@ -1,7 +1,8 @@
 import json
 import os
+from scipy.signal import savgol_filter
 from datafetcher import get_bbox_size_IBP, get_diff_IBP, get_stats_IBP
-from plotly_plot import plot_hist, smooth_plot
+from seaborn_plot import plot_hist, smooth_plot
 
 def main():
     json_files = os.listdir('C:/Users/48795/Documents/Solvemed/Annotations/13-08-2022/13-08-2022/')
