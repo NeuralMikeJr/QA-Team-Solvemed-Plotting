@@ -1,10 +1,7 @@
-import json
-import os
-import numpy as np
 from scipy.signal import savgol_filter
 from bokeh.plotting import figure, output_file, show
 from bokeh.models import ColumnDataSource, HoverTool
-from datafetcher import get_bbox_size_IBP, get_diff_IBP, get_stats_IBP
+from plotting.datafetcher import get_bbox_size_IBP, get_diff_IBP, get_stats_IBP
 
 def plot_hist(diff):
     output_file('hist.html')
